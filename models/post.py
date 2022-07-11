@@ -1,6 +1,5 @@
-from datetime import datetime
-
 from models.settings import db
+from datetime import datetime
 
 
 class Post(db.Model):
@@ -12,3 +11,9 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    @classmethod
+    def create(self, title, description, author):
+        newPost = self(title=title, description=description, author=author)
+        db.add(newPost)
+        db.commit()
+        return newPost

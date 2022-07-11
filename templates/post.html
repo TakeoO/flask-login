@@ -1,0 +1,51 @@
+{% extends "layout/loggedout.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-body bg-light">
+        <div class="card-title">
+            {{post.title}}
+        </div>
+        <div class="card-text">
+            {{ post.description }}
+
+            <ul class="list-group">
+                {% for comment in comments %}
+
+                <li class="list-group-item">
+                    {{comment.comment}}
+                    |
+                    Author: {{comment.author.email}}
+                    |
+                    Posted at: {{comment.created_at}}
+
+                    <button class="btn btn-danger">X</button>
+                </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="card">
+    <div class="card-body bg-light">
+        <div class="card-title">
+            Add new comment
+        </div>
+        <div class="card-text">
+            <form class="form"
+                  action="{{url_for('post.addComment', post_id=post.id)}}"
+                  method="post"
+            >
+                <textarea class="form-control" name="comment" required></textarea>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary mt-2 ">Add comment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

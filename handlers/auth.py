@@ -48,7 +48,7 @@ def login():
                 'password': tryUser.password,
             }))
 
-            response = make_response(redirect(url_for("dashboard")))
+            response = make_response(redirect(url_for("dashboard.dashboard")))
             # print(response)
             # exit()
             response.set_cookie("session_token", session_token, httponly=True, samesite='Strict')
